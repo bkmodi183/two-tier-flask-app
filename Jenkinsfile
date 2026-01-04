@@ -4,8 +4,10 @@ pipeline {
     agent {label "dev"};
     stages {
         stage("Code") {
-            script {
-                clone("https://github.com/bkmodi183/two-tier-flask-app.git", "main") 
+            steps {
+                    script{
+                        clone("https://github.com/bkmodi183/two-tier-flask-app.git", "main") 
+                    }
             }
         }
 
