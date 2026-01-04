@@ -24,14 +24,8 @@ pipeline {
         }
         stage("Push Tested inmage to Docker Hub"){
             steps{
-                withCredentials([usernamePassword(
-                credentialsId:"dockerHubCreds",
-                passwordVariable: "dockerHubPass",
-                usernameVariable: "dockerHubUser"
-                )]){
-                    sh "docker image tag two-tier-flask-app:latest ${env.dockerHubUser}/two-tier-flask-app:latest"
-                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                    sh "docker push ${env.dockerHubUser}/two-tier-flask-app:latest"
+                script{
+                    docker_push(dockerHubCreds, two-teir-flask-app)
                 }
             }
         }
